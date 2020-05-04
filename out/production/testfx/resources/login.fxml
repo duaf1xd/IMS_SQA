@@ -8,11 +8,11 @@
 <?import javafx.scene.text.Font?>
 
 
-<Pane fx:controller="hanu.controllers.LoginController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:controller="hanu.view.LoginView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TextField fx:id="usernameField" layoutX="147.0" layoutY="150.0" prefHeight="25.0" prefWidth="306.0" />
       <PasswordField fx:id="passwordField" layoutX="148.0" layoutY="215.0" prefHeight="25.0" prefWidth="306.0" />
-      <Button fx:id="loginButton" layoutX="239.0" layoutY="291.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="122.0" text="Login" onAction="#attemptLogin">
+      <Button fx:id="loginButton" layoutX="239.0" layoutY="291.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="122.0" text="Login" onAction="#createDashboardView">
          <font>
             <Font size="18.0" />
          </font>

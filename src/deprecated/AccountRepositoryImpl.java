@@ -1,6 +1,7 @@
-package hanu.db;
+package deprecated;
 
 
+import hanu.db.connect;
 import hanu.model.domain.Account;
 import hanu.model.domain.Role;
 import hanu.model.repository.AccountRepository;

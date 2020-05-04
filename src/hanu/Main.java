@@ -1,6 +1,6 @@
 package hanu;
 
-import hanu.controllers.LandingController;
+import hanu.view.HomepageView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,9 +11,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        FXMLLoader firstPaneLoader = new FXMLLoader(getClass().getResource("../resources/landing.fxml"));
-        Parent firstPane= firstPaneLoader.load();
-        primaryStage.setTitle("Hello World");
+        FXMLLoader homepageLoader = new FXMLLoader(getClass().getResource("../resources/landing.fxml"));
+        Parent firstPane= homepageLoader.load();
+        primaryStage.setTitle("Inventory Management System");
         Scene firstScene= new Scene(firstPane, 800, 600);
 
 
@@ -21,7 +21,7 @@ public class Main extends Application {
         Parent secondPane = secondPageLoader.load();
         Scene secondScene = new Scene(secondPane, 800, 600);
 
-        LandingController landingController= (LandingController) firstPaneLoader.getController();
+        HomepageView landingController= (HomepageView) homepageLoader.getController();
         landingController.setLoginPage(secondScene);
 
         primaryStage.setScene(firstScene);

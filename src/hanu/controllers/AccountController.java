@@ -1,6 +1,5 @@
 package hanu.controllers;
 
-import hanu.db.AccountRepositoryImpl;
 import hanu.db.connect;
 import hanu.model.domain.Account;
 import hanu.model.domain.Role;
@@ -10,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -73,8 +73,29 @@ public class AccountController implements AccountRepository{
     }
 
     @Override
-    public List<Account> findAll() {
-        return null;
+    public List<Account> findAll() { //currently omitting admins
+        connection = connect.getConnection();
+        List<Account> accountList= new ArrayList<Account>();
+        try {
+
+            String admlogin = "select * from account where (role!= \"Admin\")";
+            PreparedStatement stm = connection.prepareStatement(admlogin);
+
+            ResultSet result = stm.executeQuery();
+
+            while (result.next()) {
+                int id = result.getInt("id");
+                String username = result.getString("username");
+                String password = result.getString("password");
+                Role role = Role.valueOf(result.getString("role"));
+                accountList.add(new Account(id, username, password, role));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return accountList;
     }
 
     @Override

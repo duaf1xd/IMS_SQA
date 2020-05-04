@@ -1,66 +1,64 @@
-//package hanu.view;
-//
-//import hanu.db.AccountRepositoryImpl;
-//import hanu.db.connect;
-//import hanu.model.domain.Account;
-//import javafx.event.ActionEvent;
-//import javafx.fxml.FXML;
-//import javafx.fxml.FXMLLoader;
-//import javafx.scene.Parent;
-//import javafx.scene.Scene;
-//import javafx.scene.control.Button;
-//import javafx.scene.control.TextField;
-//import javafx.stage.Stage;
-//
-//import java.io.IOException;
-//import java.sql.Connection;
-//
-//public class LoginView extends Scene {
-//
-//    public LoginView(Parent root) {
-//        super(root);
-//    }
-//
-//    public LoginView init() throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("resources/login.fxml"));
-//        Scene scene = new Scene(root);
-//        setScene(scene);
-//        return this;
-//    }
-//
-//    @FXML
-//    TextField usernameField;
-//    @FXML
-//    TextField passwordField;
-//
-//    @FXML
-//    private void attemptLogin(ActionEvent event) {
-//        Connection connection = connect.getConnection();
-//        AccountRepositoryImpl ari= new AccountRepositoryImpl();
-//
-//        String username= usernameField.getText();
-//        String password= passwordField.getText();
-//
-//        System.out.println("Executed login");
-//        System.out.println(username + " " + password);
-//
-//        Account account= ari.findByUsernameAndPassword(username, password);
-//        if (account!=null){
-//            System.out.println(account.toString());
-//            System.out.println("Login success");
-//        }
-//        else{
-//            System.out.println("Login failed");
-//        }
-//    }
-//
-//    public void createAdminView(ActionEvent actionEvent) throws IOException {
-//        Stage activeWindow = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-//        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("resources/admindashboardview.fxml"));
-//        Scene scene = new AdminDashboardView(root);
-//        activeWindow.setScene(scene);
-//        System.out.println("navigated!");
-//    }
-//
-//
-//}
+package hanu.view;
+
+import hanu.controllers.AccountController;
+import hanu.db.connect;
+import hanu.model.domain.Account;
+import hanu.model.domain.Role;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.sql.Connection;
+
+public class LoginView {
+    @FXML
+    TextField usernameField;
+    @FXML
+    TextField passwordField;
+    private Scene dashboardPage;
+
+    Connection connection = connect.getConnection();
+    AccountController ari= new AccountController();
+
+    @FXML
+    private void createDashboardView(ActionEvent event) throws Exception{
+        String username= usernameField.getText();
+        String password= passwordField.getText();
+
+        System.out.println("Executed login");
+        System.out.println(username + " " + password);
+
+        Account account= ari.findByUsernameAndPassword(username, password);
+        if (account!=null){
+            if(account.getRole()== Role.Admin){
+                FXMLLoader secondPageLoader = new FXMLLoader(getClass().getResource("/resources/admindashboardview.fxml"));
+                Parent secondPane = secondPageLoader.load();
+                Scene secondScene = new Scene(secondPane, 1200, 800);
+                setDashboardPage(secondScene);
+                toDashboardPage(event);
+            }
+        }
+        else{
+            System.out.println("Login failed");
+        }
+    }
+
+
+    @FXML
+    public void setDashboardPage(Scene scene) {
+        dashboardPage = scene;
+    }
+
+    @FXML
+    private void toDashboardPage(ActionEvent event) {
+        //label.setText("Hello World!");
+        System.out.println("Switch to dashboard page");
+        Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        primaryStage.setScene(dashboardPage);
+    }
+}
