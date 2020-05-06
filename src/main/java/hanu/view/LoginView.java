@@ -36,7 +36,7 @@ public class LoginView {
         Account account= ari.findByUsernameAndPassword(username, password);
         if (account!=null){
             if(account.getRole()== Role.Admin){
-                FXMLLoader secondPageLoader = new FXMLLoader(getClass().getResource("/resources/admindashboardview.fxml"));
+                FXMLLoader secondPageLoader = new FXMLLoader(getClass().getResource("/admindashboardview.fxml"));
                 Parent secondPane = secondPageLoader.load();
                 Scene secondScene = new Scene(secondPane, 1200, 800);
                 setDashboardPage(secondScene);

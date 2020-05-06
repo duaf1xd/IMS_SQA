@@ -2,10 +2,7 @@ package hanu.view;
 
 
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.*;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
 import javafx.stage.*;
 
 
@@ -16,7 +13,7 @@ public class CreateAccountPopup {
     {
         Stage popupwindow=new Stage();
 
-        FXMLLoader homepageLoader = new FXMLLoader(getClass().getResource("/resources/newaccountpopup.fxml"));
+        FXMLLoader homepageLoader = new FXMLLoader(getClass().getResource("/newaccountpopup.fxml"));
         Parent firstPane= homepageLoader.load();
         Scene firstScene= new Scene(firstPane, 800, 600);
 
