@@ -26,7 +26,7 @@ public class LoginView {
     AccountController ari= new AccountController();
 
     @FXML
-    private void createDashboardView(ActionEvent event) throws Exception{
+    public void createDashboardView(ActionEvent event) throws Exception{
         String username= usernameField.getText();
         String password= passwordField.getText();
 

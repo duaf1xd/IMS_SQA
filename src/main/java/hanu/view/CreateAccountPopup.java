@@ -13,9 +13,9 @@ public class CreateAccountPopup {
     {
         Stage popupwindow=new Stage();
 
-        FXMLLoader homepageLoader = new FXMLLoader(getClass().getResource("/newaccountpopup.fxml"));
-        Parent firstPane= homepageLoader.load();
-        Scene firstScene= new Scene(firstPane, 800, 600);
+        FXMLLoader popupLoader = new FXMLLoader(getClass().getResource("/newaccountpopup.fxml"));
+        Parent firstPane= popupLoader.load();
+        Scene firstScene= new Scene(firstPane, 400, 800);
 
         popupwindow.initModality(Modality.APPLICATION_MODAL);
         popupwindow.setTitle("This is a pop up window");

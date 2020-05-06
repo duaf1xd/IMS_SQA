@@ -5,10 +5,7 @@ import hanu.model.domain.Account;
 import hanu.model.domain.Role;
 import hanu.model.repository.AccountRepository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +15,27 @@ public class AccountController implements AccountRepository{
 
 
     @Override
-    public void add(Account account) {
+    public boolean add(Account account) {
+        connection = connect.getConnection();
+
+        try {
+
+            String admlogin = "INSERT INTO account (`id`, `username`, `password`, `role`) VALUES (?, ?, ?, ?)";
+            PreparedStatement stm = connection.prepareStatement(admlogin);
+            stm.setNull(1, Types.INTEGER);
+            stm.setString(2, account.getUsername());
+            stm.setString(3, account.getPassword());
+            stm.setString(4, account.getRole().name());
+
+            if(stm.executeUpdate() == 0){
+                return false;
+            }
+            else return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
 
     }
 
@@ -119,8 +136,8 @@ public class AccountController implements AccountRepository{
         Account account= null;
         try {
 
-            String admlogin = "select * from account where ( username = ? and password = ?)";
-            PreparedStatement stm = connection.prepareStatement(admlogin);
+            String loginCredentials = "select * from account where ( username = ? and password = ?)";
+            PreparedStatement stm = connection.prepareStatement(loginCredentials);
             stm.setString(1, username);
             stm.setString(2, password);
 

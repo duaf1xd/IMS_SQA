@@ -16,7 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AdminDashboardView implements Initializable {
+public class AdminDashboardView {
     AccountController ac= new AccountController();
 
     @FXML
@@ -41,8 +41,8 @@ public class AdminDashboardView implements Initializable {
 //            );
 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+
+    public void initialize() {
         idColumn.setCellValueFactory(new PropertyValueFactory<Account, Integer>("id"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<Account, String>("username"));
         passwordColumn.setCellValueFactory(new PropertyValueFactory<Account, String>("password"));

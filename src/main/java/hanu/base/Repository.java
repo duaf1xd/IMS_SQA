@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface Repository<T, ID extends Serializable> {
-    void add(T item);
+    boolean add(T item);
     void add(List<T> items);
     long count();
     void delete(T item);

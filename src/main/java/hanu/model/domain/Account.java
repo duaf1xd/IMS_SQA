@@ -13,7 +13,13 @@ public class Account {
         this.role = role;
     }
 
-//    public Account(int id, String username, String password, int role) { // not robust
+    public Account(String username, String password, Role role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
+    //    public Account(int id, String username, String password, int role) { // not robust
 //        this.id = id;
 //        this.username = username;
 //        this.password = password;

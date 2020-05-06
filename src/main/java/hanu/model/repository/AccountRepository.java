@@ -8,7 +8,7 @@ import java.util.List;
 public interface AccountRepository extends Repository<Account, Integer> {
     List<Account> accounts= null;
 
-    public void add(Account account);
+    public boolean add(Account account);
 
     public void remove(int id);
 
